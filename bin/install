@@ -47,7 +47,7 @@ install_bazel() {
 
   check_install_type "$install_type"
 
-  curl -OL# "$installer_path" "$installer_url"
+  curl -s -o "$installer_path" "$installer_url"
   chmod u+x "$installer_path"
 
   "$installer_path" --prefix "$install_path"

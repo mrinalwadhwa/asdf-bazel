@@ -50,7 +50,7 @@ install_bazel() {
   curl -L -s -o "$installer_path" "$installer_url"
   chmod u+x "$installer_path"
 
-  "$installer_path" --prefix "$install_path"
+  "$installer_path" --prefix="$install_path"
 }
 
 install_bazel "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"

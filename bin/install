@@ -4,6 +4,8 @@
 set -o nounset -o pipefail -o errexit
 IFS=$'\n\t'
 
+set -x
+
 TMPDIR=${TMPDIR:-/tmp}
 
 get_platform() {

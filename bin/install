@@ -4,6 +4,8 @@
 set -o nounset -o pipefail -o errexit
 IFS=$'\n\t'
 
+TMPDIR=${TMPDIR:-/tmp}
+
 get_platform() {
   uname | tr '[:upper:]' '[:lower:]'
 }
@@ -19,14 +21,6 @@ get_installer_url() {
   local installer_name="$(get_installer_name $version)"
   local url_base="https://github.com/bazelbuild/bazel/releases/download"
   echo "$url_base/$version/$installer_name"
-}
-
-get_tmpdir() {
-  if [ "$TMPDIR" = "" ]; then
-    echo "$(mktemp -d)"
-  else
-    echo "$TMPDIR"
-  fi
 }
 
 check_install_type() {
@@ -46,7 +40,7 @@ install_bazel() {
   local version="$2"
   local install_path="$3"
   local installer_name="$(get_installer_name $version)"
-  local installer_path="$(get_tmpdir)/$installer_name"
+  local installer_path="$TMPDIR/$installer_name"
   local installer_url="$(get_installer_url $version)"
 
   check_install_type "$install_type"

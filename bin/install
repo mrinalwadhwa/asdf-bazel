@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
 
-set -o errexit -o pipefail
-
-set -x
+# redsymbol.net/articles/unofficial-bash-strict-mode/
+set -o nounset -o pipefail -o errexit
+IFS=$'\n\t'
 
 get_tmpdir() {
+  local tmpdir
+
+  set +o nounset
   if [ "$TMPDIR" = "" ]; then
-    echo "$(mktemp -d -t ruby_build_XXXXXX)"
+    tmpdir="$(mktemp -d -t ruby_build_XXXXXX)"
   else
-    echo "$TMPDIR"
+    tmpdir="$TMPDIR"
   fi
+  set -o nounset
+
+  echo "$tmpdir"
 }
 
 get_platform() {

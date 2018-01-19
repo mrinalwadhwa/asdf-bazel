@@ -8,7 +8,7 @@ set -x
 
 get_tmpdir() {
   if [ "$TMPDIR" = "" ]; then
-    echo "$(mktemp -d -t bazel_build_XXXXXX)"
+    echo "$(mktemp -d -t ruby_build_XXXXXX)"
   else
     echo "$TMPDIR"
   fi

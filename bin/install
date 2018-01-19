@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 
-# redsymbol.net/articles/unofficial-bash-strict-mode/
-set -o nounset -o pipefail -o errexit
-IFS=$'\n\t'
+set -o errexit -o pipefail
 
 set -x
+
+get_tmpdir() {
+  if [ "$TMPDIR" = "" ]; then
+    echo "$(mktemp -d -t ruby_build_XXXXXX)"
+  else
+    echo "$TMPDIR"
+  fi
+}
 
 get_platform() {
   uname | tr '[:upper:]' '[:lower:]'
@@ -39,15 +45,9 @@ install_bazel() {
   local install_type="$1"
   local version="$2"
   local install_path="$3"
-
-  if [ "$TMPDIR" = "" ]; then
-    local tmp_download_dir=$(mktemp -d -t ruby_build_XXXXXX)
-  else
-    local tmp_download_dir=$TMPDIR
-  fi
-
+  local tmpdir="$(get_tmpdir)"
   local installer_name="$(get_installer_name $version)"
-  local installer_path="$tmp_download_dir/$installer_name"
+  local installer_path="$tmpdir/$installer_name"
   local installer_url="$(get_installer_url $version)"
 
   check_install_type "$install_type"

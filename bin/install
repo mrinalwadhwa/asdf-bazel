@@ -9,7 +9,7 @@ get_tmpdir() {
 
   set +o nounset
   if [ "$TMPDIR" = "" ]; then
-    tmpdir="$(mktemp -d -t ruby_build_XXXXXX)"
+    tmpdir="$(mktemp -d -t bazel_build_XXXXXX)"
   else
     tmpdir="$TMPDIR"
   fi

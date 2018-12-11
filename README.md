@@ -9,7 +9,7 @@ This plugin uses the Bazel [binary installer](https://docs.bazel.build/versions/
 
 ## Install
 
-`asdf plugin-add bazel https://github.com/mrinalwadhwa/asdf-bazel.git`
+`asdf plugin-add bazel https://github.com/rajatvig/asdf-bazel.git`
 
 ## Use
 

@@ -22,10 +22,15 @@ get_platform() {
   uname | tr '[:upper:]' '[:lower:]'
 }
 
+get_arch() {
+  uname -m
+}
+
 get_installer_name() {
   local version="$1"
   local platform="$(get_platform)"
-  echo "bazel-$version-installer-$platform-x86_64.sh"
+  local arch="$(get_arch)"
+  echo "bazel-$version-installer-$platform-$arch.sh"
 }
 
 get_installer_url() {
